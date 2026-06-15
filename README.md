@@ -37,10 +37,56 @@ data/
 └── aokvqa/
     └── aokvqa_v1.0_val.json
 ```
+
+# Model Checkpoints & Third-Party Code Setup
+To run Q-Align, you need to set up the corresponding visual grounding (GroundingDINO) and scene graph (SGDet) repositories, along with their pre-trained weights. Please follow the instructions below to configure the directory structure.
+
+## 1. GroundingDINO Configuration
+We utilize GroundingDINO for question-guided visual grounding. 
+
+1. Download the model configuration file `GroundingDINO_SwinT_OGC.py` from the official(https://github.com/IDEA-Research/GroundingDINO) repository and place it into your local `config/` directory.
+2. Download the pre-trained weights (`groundingdino_swint_ogc.pth`) into the `weights/`.
+
+## 2. Scene Graph Benchmark Setup (SGDet)
+Our framework integrates scene graph parsing based on KaihuaTang/Scene-Graph-Benchmark.pytorch.
+
+1. Pre-trained Weights: Download the SGDet checkpoint from the official repository and place it into the checkpoint/scene_graph/ directory.
+
+2. Compiling C++/CUDA Extensions: Since this scene graph toolkit contains custom C++/CUDA operations, you must compile them locally before running the framework.
+
+```text
+Q-Align/
+├── checkpoint/
+│   └── scene_graph/
+│       ├── config.yml
+│       ├── labels.json
+│       ├── last_checkpoint
+│       ├── log.txt
+│       ├── model_0028000.pth
+│       └── VG_stanford_filtered_with_attribute_train_statistics.cache
+├── config/
+│   └── GroundingDINO_SwinT_OGC.py
+├── data/
+│   ├── a_okvqa/
+│   ├── coco/
+│   └── ok_vqa/
+├── model/
+├── Scene-Graph/
+├── weight/
+│   └── groundingdino_swint_ogc.pth
+├── main_eval_gpt.py
+├── main_eval_gpt_map_global.py
+└── main_eval_gpt_map_local.py
+```
+
 # Environments
 
 python 3.8
+
 torch 2.4.1
+
 openai==0.28.0
+
 transformers==4.46.3
+
 sentence_transformers==3.2.1
