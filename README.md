@@ -27,6 +27,7 @@ https://github.com/allenai/aokvqa#downloading-the-dataset
 
 Please download the OK-VQA and A-OKVQA datasets and organize them as follows:
 
+```text
 data/
 ├── coco/
 │   ├── val2014/
@@ -35,7 +36,7 @@ data/
 │   └── mscoco_val2014_annotations.json
 └── aokvqa/
     └── aokvqa_v1.0_val.json
-
+```
 # Environments
 
 python 3.8
