@@ -16,7 +16,9 @@ Experiments on OK-VQA and A-OKVQA demonstrate that Q-Align achieves competitive 
 # Figs
 <img width="4371" height="2008" alt="Fig3" src="https://github.com/user-attachments/assets/011f01ec-1106-4dcf-b549-b8e209be493f" />
 
-# Data Preparation
+# 🚀 Quick Start & Usage
+
+## 📊 Data Preparation 
 OK-VQA and Images
 
 https://okvqa.allenai.org/download.html
@@ -38,16 +40,16 @@ data/
     └── aokvqa_v1.0_val.json
 ```
 
-# Model Checkpoints & Third-Party Code Setup
+## 📂 Model Checkpoints & Third-Party Code Setup
 To run Q-Align, you need to set up the corresponding visual grounding (GroundingDINO) and scene graph (SGDet) repositories, along with their pre-trained weights. Please follow the instructions below to configure the directory structure.
 
-## 1. GroundingDINO Configuration
+### 1. GroundingDINO Configuration
 We utilize GroundingDINO for question-guided visual grounding. 
 
 1. Download the model configuration file `GroundingDINO_SwinT_OGC.py` from the official(https://github.com/IDEA-Research/GroundingDINO) repository and place it into your local `config/` directory.
 2. Download the pre-trained weights (`groundingdino_swint_ogc.pth`) into the `weights/`.
 
-## 2. Scene Graph Benchmark Setup (SGDet)
+### 2. Scene Graph Benchmark Setup (SGDet)
 Our framework integrates scene graph parsing based on KaihuaTang/Scene-Graph-Benchmark.pytorch.
 
 1. Pre-trained Weights: Download the SGDet checkpoint from the official repository and place it into the checkpoint/scene_graph/ directory.
@@ -78,6 +80,19 @@ Q-Align/
 ├── main_eval_gpt_map_global.py
 └── main_eval_gpt_map_local.py
 ```
+## ⚡Fast & Efficient Evaluation via Caption Caching
+
+Generating fine-grained, question-guided captions from scratch (which involves key information extraction and scene graph fusion) is computationally heavy and time-consuming when scaling up to entire VQA datasets. To accelerate multiple experimental runs (e.g., computing average accuracy over multiple trials) and ablation studies, Q-Align introduces a **Caption Caching & Mapping Mechanism**.
+
+Instead of rerunning the entire local caption generation pipeline every time, the structured captions from the first run can be saved into a local JSON file. Subsequent experiments can directly map and read from this cache.
+
+We provide two specialized evaluation scripts to support this accelerated pipeline:
+* `main_eval_gpt_map_global.py`: Conducts evaluation by directly loading pre-generated **global** caption from the JSON cache.
+* `main_eval_gpt_map_local.py`: Conducts evaluation by directly loading pre-generated **global** and **fine-grained local** captions from the JSON cache.
+
+**Benefits:**
+* ⚡ **Drastically Reduces Experiment Time:** Bypasses the complex visual parsing and caption generation pipeline for repetitive runs, turning hours of local computation into seconds of JSON loading.
+* 🖥️ **Saves Computational Resources:** Frees up local CPU/GPU resources, allowing you to focus purely on evaluating the reasoning capabilities of the LLM.
 
 # Environments
 
