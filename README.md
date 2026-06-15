@@ -50,7 +50,7 @@ We utilize GroundingDINO for question-guided visual grounding.
 2. Download the pre-trained weights (`groundingdino_swint_ogc.pth`) into the `weights/`.
 
 ### 2. Scene Graph Benchmark Setup (SGDet)
-Our framework integrates scene graph parsing based on KaihuaTang/Scene-Graph-Benchmark.pytorch.
+Our framework integrates scene graph parsing based on KaihuaTang/Scene-Graph-Benchmark.pytorch(https://github.com/KaihuaTang/Scene-Graph-Benchmark.pytorch).
 
 1. Pre-trained Weights: Download the SGDet checkpoint from the official repository and place it into the checkpoint/scene_graph/ directory.
 
