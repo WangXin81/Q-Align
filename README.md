@@ -40,4 +40,7 @@ data/
 # Environments
 
 python 3.8
-
+torch 2.4.1
+openai==0.28.0
+transformers==4.46.3
+sentence_transformers==3.2.1
