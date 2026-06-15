@@ -75,4 +75,4 @@ def groundingdino_inference(
 
     #print(f"推理完成，检测到 {len(all_boxes)} 个框")
 
-    return all_boxes,all_scores,all_labels
+    return all_boxes,all_labels,all_scores
