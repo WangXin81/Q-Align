@@ -156,7 +156,7 @@ def format_local_captions_with_label_index(local_captions, labels):
 
     for idx, (caption, label) in enumerate(zip(local_captions, labels)):
         label_counter[label] += 1
-        formatted_caption = f"[{idx}] {label}: {caption}"
+        formatted_caption = f"{label}: {caption}"
         formatted.append(formatted_caption)
 
     return formatted
